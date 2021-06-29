@@ -15,11 +15,7 @@ export default function Post({ post }) {
   const { user: currentUser } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const moreOptions = [
-    currentUser.userId === post.userId && "Delete post",
-    currentUser.userId !== post.userId && "Report post"
-  ];
-
+  
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes])
@@ -50,9 +46,16 @@ export default function Post({ post }) {
     setAnchorEl(null);
   }
 
-  const vertClickHandler = async () => {
+  const vertDeleteHandler = async () => {
     try{
-      
+      console.log("delete post");
+    } catch(err){
+      console.log(err);
+    }
+  }
+  const vertReportHandler = async () => {
+    try{
+      console.log("report post");
     } catch(err){
       console.log(err);
     }
@@ -87,13 +90,8 @@ export default function Post({ post }) {
               anchorEl={anchorEl}
               keepMounted onClose={vertCloseHandler}
               open={open}>
-              {moreOptions.map((option) => (
-                <MenuItem
-                  key={option}
-                  onClick={vertClickHandler}>
-                  {option}
-                </MenuItem>
-              ))}
+              {currentUser._id === post.userId ? <MenuItem onClick={vertDeleteHandler}>Delete post</MenuItem> : null}
+              {currentUser._id !== post.userId ? <MenuItem onClick={vertReportHandler}>Report post</MenuItem> : null}
             </Menu>
           </div>
         </div>
