@@ -12,8 +12,11 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
-    currentUser.following.includes(user?.id)
+    currentUser.following.includes(user?._id)
   );
+  useEffect(() => {
+    setFollowed(currentUser.following.includes(user?._id));
+  });
 
   useEffect(() => {
     const getFriends = async () => {
@@ -52,7 +55,7 @@ export default function Rightbar({ user }) {
         <div className="birthdayContainer">
           <img className="birthdayImg" src="assets/gift.png" alt="" />
           <span className="birthdayText">
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
+            <b>Pola Foster</b> and <b>3 other friends</b> have a birthday today.
           </span>
         </div>
         <img className="rightbarAd" src="assets/ad.png" alt="" />

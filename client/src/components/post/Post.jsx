@@ -15,7 +15,7 @@ export default function Post({ post }) {
   const { user: currentUser } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  
+
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes])
@@ -46,9 +46,10 @@ export default function Post({ post }) {
     setAnchorEl(null);
   }
 
-  const vertDeleteHandler = async () => {
+  const vertDeleteHandler = () => {
     try{
-      console.log("delete post");
+      axios.delete("/posts/" + post._id);
+      window.location.reload();
     } catch(err){
       console.log(err);
     }
