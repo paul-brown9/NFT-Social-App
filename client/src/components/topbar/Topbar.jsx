@@ -39,16 +39,17 @@ export default function Topbar() {
         <div className="searchbar">
           <Search className="searchIcon" />
           <input
-            placeholder="Search for friend, post or video"
+            placeholder="Search for an artist"
             className="searchInput"
+            type="search"
           />
         </div>
       </div>
       <div className="topbarRight">
-        <div className="topbarLinks">
+        {/* <div className="topbarLinks">
           <span className="topbarLink">Homepage</span>
           <span className="topbarLink">Timeline</span>
-        </div>
+        </div> */}
         <div className="topbarIcons">
           <div className="topbarIconItem">
             <Person />

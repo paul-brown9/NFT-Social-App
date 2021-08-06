@@ -9,6 +9,8 @@ import {
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import Web3 from "web3";
+import Web3Modal from "web3modal";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
@@ -41,6 +43,7 @@ export default function Share() {
       console.log(err);
     }
   };
+
   return (
     <div className="share">
       <div className="shareWrapper">
