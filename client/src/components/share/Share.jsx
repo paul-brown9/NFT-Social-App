@@ -6,6 +6,7 @@ import {
   EmojiEmotions,
   Cancel,
 } from "@material-ui/icons";
+import { TextField } from "@material-ui/core";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
@@ -17,6 +18,8 @@ export default function Share() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef();
   const [file, setFile] = useState(null);
+  const [nftContract, setNFTContract] = useState(null);
+  const [nftTokenId, setNFTTokenId] = useState(null);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -43,6 +46,11 @@ export default function Share() {
       console.log(err);
     }
   };
+
+  const submitNFTHandler = async (e) => {
+    e.preventDefault();
+    
+  }
 
   return (
     <div className="share">
@@ -72,7 +80,8 @@ export default function Share() {
         )}
         <form className="shareBottom" onSubmit={submitHandler}>
           <div className="shareOptions">
-            <label htmlFor="file" className="shareOption">
+            
+            {/* <label htmlFor="file" className="shareOption">
               <PermMedia htmlColor="tomato" className="shareIcon" />
               <span className="shareOptionText">Photo</span>
               <input
@@ -82,10 +91,10 @@ export default function Share() {
                 accept=".png, .jpeg, .jpg, .gif"
                 onChange={(e) => setFile(e.target.files[0])}
               />
-            </label>
-            <div className="shareOption">
+            </label> */}  
+            {/* <div className="shareOption">
               <Label htmlColor="blue" className="shareIcon" />
-              <span className="shareOptionText">Tag</span>
+              <span className="shareOptionText">NFT</span>
             </div>
             <div className="shareOption">
               <Room htmlColor="green" className="shareIcon" />
@@ -94,12 +103,23 @@ export default function Share() {
             <div className="shareOption">
               <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
               <span className="shareOptionText">Feelings</span>
-            </div>
+            </div> */}
           </div>
           <button className="shareButton" type="submit">
             Share
           </button>
         </form>
+        
+        {/* <div className="shareNFTContainer"> */}
+        <div className="shareOption">
+          <span className="shareOptionText">Find an NFT:</span>
+          <form className="shareNFT" noValidate autoComplete="off" onSubmit={submitNFTHandler}>
+            <TextField id="outlined-basic" size="small" margin="dense" label="Contract address" variant="outlined" />
+            <TextField id="outlined-basic" size="small" margin="dense" label="Token ID" variant="outlined" />
+            <button className="shareFindButton" type="submit">Find</button>            
+          </form>
+        {/* </div> */}
+        </div>
       </div>
     </div>
   );

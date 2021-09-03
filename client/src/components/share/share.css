@@ -25,6 +25,7 @@
 .shareInput {
   border: none;
   width: 80%;
+  font-size: large;
 }
 
 .shareInput:focus {
@@ -50,7 +51,7 @@
     display: flex;
     align-items: center;
     margin-right: 15px;
-    cursor: pointer;
+    margin-top: -60px;
 }
 
 .shareIcon{
@@ -59,17 +60,34 @@
 }
 
 .shareOptionText{
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 500;
 }
 
 .shareButton{
     border: none;
-    padding: 7px;
+    padding: 10px;
     border-radius: 5px;
     background-color: green;
     font-weight: 500;
     margin-right: 20px;
+    margin-top: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.shareNFT{
+  display: flex;
+  align-items: center;
+}
+
+.shareFindButton{
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(76, 76, 236);
+    font-weight: 500;
+    margin: 10px 20px 10px 10px;
     cursor: pointer;
     color: white;
 }

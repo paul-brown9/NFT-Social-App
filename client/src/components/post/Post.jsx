@@ -6,6 +6,9 @@ import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
+import {NFTE} from '@nfte/react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -99,12 +102,15 @@ export default function Post({ post }) {
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
           <img className="postImg" src={post.img ? PF + post.img : ""} alt="" />
+          {post.nftContract && post.nftTokenId ? <NFTE contract={post.nftContract} tokenId={post.nftTokenId}/> : null}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img className="likeIcon" src={`${PF}like.png`} onClick={likeHandler} alt="" />
-            <img className="likeIcon" src={`${PF}heart.png`} onClick={likeHandler} alt="" />
-            <span className="postLikeCounter">{like} people like it</span>
+            {/* <img className="likeIcon" src={`${PF}like.png`} onClick={likeHandler} alt="" /> */}
+            {isLiked ? <FavoriteIcon className="likeIcon" onClick={likeHandler}></FavoriteIcon> 
+                      : <FavoriteBorderIcon className="likeIcon" onClick={likeHandler}></FavoriteBorderIcon>
+            }
+            <span className="postLikeCounter">{like}</span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText">{post.comment} comments</span>

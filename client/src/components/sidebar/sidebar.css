@@ -29,7 +29,10 @@
 .sidebarListItem {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-left: 50px;
+  font-size: 30px;
+  font-weight: 1000;
 }
 
 .sidebarIcon {

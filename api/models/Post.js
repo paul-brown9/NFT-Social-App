@@ -15,6 +15,12 @@ const PostSchema = new mongoose.Schema({
         likes: {
             type: Array,
             default: []
+        },
+        nftContract: {
+            type: String
+        },
+        nftTokenId: {
+            type: String
         }
     },
     {timestamps: true}

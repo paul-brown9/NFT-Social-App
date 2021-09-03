@@ -1,9 +1,13 @@
 .rightbar {
-  flex: 3.5;
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 50px;
 }
 
 .rightbarWrapper {
-  padding: 20px 20px 0 0;
+  padding: 0 20px 0 0;
 }
 
 .birthdayContainer {
@@ -28,10 +32,6 @@
   margin: 30px 0;
 }
 
-.rightbarTitle{
-    margin-bottom: 20px;
-}
-
 .rightbarFriendList {
   padding: 0;
   margin: 0;
@@ -39,9 +39,10 @@
 }
 
 .rightbarTitle{
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: 1000;
+  margin-bottom: 15px;
+  margin-top: 20px;
 }
 
 .rightbarInfo{
@@ -79,7 +80,7 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 50%;
 }
 
 .rightbarFollowButton{
