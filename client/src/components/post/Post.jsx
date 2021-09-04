@@ -9,6 +9,8 @@ import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import {NFTE} from '@nfte/react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -49,9 +51,10 @@ export default function Post({ post }) {
     setAnchorEl(null);
   }
 
-  const vertDeleteHandler = () => {
+  const vertDeleteHandler = async (e) => {
+    e.preventDefault();
     try{
-      axios.delete("/posts/" + post._id);
+      await axios.delete("/posts/" + post._id, { data: { userId: currentUser._id }});
       window.location.reload();
     } catch(err){
       console.log(err);
@@ -94,8 +97,8 @@ export default function Post({ post }) {
               anchorEl={anchorEl}
               keepMounted onClose={vertCloseHandler}
               open={open}>
-              {currentUser._id === post.userId ? <MenuItem onClick={vertDeleteHandler}>Delete post</MenuItem> : null}
-              {currentUser._id !== post.userId ? <MenuItem onClick={vertReportHandler}>Report post</MenuItem> : null}
+              {currentUser._id === post.userId ? <MenuItem onClick={vertDeleteHandler}> <DeleteOutlinedIcon className="deleteIcon"/> Delete</MenuItem> : null}
+              {currentUser._id !== post.userId ? <MenuItem onClick={vertReportHandler}> <FlagOutlinedIcon className="reportIcon"/> Report</MenuItem> : null}
             </Menu>
           </div>
         </div>

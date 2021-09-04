@@ -70,6 +70,14 @@
     cursor: pointer;
 }
 
+.deleteIcon{
+  margin-right: 8px;
+}
+
+.reportIcon{
+  margin-right: 8px;
+}
+
 .postLikeCounter{
     font-size: 15px;
 }

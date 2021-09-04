@@ -109,8 +109,6 @@ export default function Share() {
             Share
           </button>
         </form>
-        
-        {/* <div className="shareNFTContainer"> */}
         <div className="shareOption">
           <span className="shareOptionText">Find an NFT:</span>
           <form className="shareNFT" noValidate autoComplete="off" onSubmit={submitNFTHandler}>
@@ -118,7 +116,6 @@ export default function Share() {
             <TextField id="outlined-basic" size="small" margin="dense" label="Token ID" variant="outlined" />
             <button className="shareFindButton" type="submit">Find</button>            
           </form>
-        {/* </div> */}
         </div>
       </div>
     </div>
