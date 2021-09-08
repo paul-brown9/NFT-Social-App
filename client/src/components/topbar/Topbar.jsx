@@ -1,5 +1,7 @@
 import "./topbar.css";
-import { Search, Person, Chat, Notifications } from "@material-ui/icons";
+import { Search, Person, ChatOutlined} from "@material-ui/icons";
+import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
+import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
@@ -46,21 +48,13 @@ export default function Topbar() {
         </div>
       </div>
       <div className="topbarRight">
-        {/* <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
-        </div> */}
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <Person />
-            <span className="topbarIconBadge">1</span>
-          </div>
-          <div className="topbarIconItem">
-            <Chat />
+            <ChatBubbleOutlineOutlinedIcon />
             <span className="topbarIconBadge">5</span>
           </div>
           <div className="topbarIconItem">
-            <Notifications />
+            <NotificationsOutlinedIcon />
             <span className="topbarIconBadge">1</span>
           </div>
         </div>

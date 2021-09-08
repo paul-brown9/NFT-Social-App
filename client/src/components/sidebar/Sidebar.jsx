@@ -12,11 +12,12 @@ import {
 } from "@material-ui/icons";
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
+import { NFTE } from "@nfte/react";
 
-export default function Sidebar() {
-  return (
-    <div className="sidebar">
-      <div className="sidebarWrapper">
+export default function Sidebar({user}) {
+  const HomeSidebar = () => {
+    return (
+      <>
         <ul className="sidebarList">
           <li className="sidebarListItem">
             <RssFeed className="sidebarIcon" />
@@ -30,30 +31,6 @@ export default function Sidebar() {
             <PlayCircleFilledOutlined className="sidebarIcon" />
             <span className="sidebarListItemText">Videos</span>
           </li>
-          {/* <li className="sidebarListItem">
-            <Group className="sidebarIcon" />
-            <span className="sidebarListItemText">Groups</span>
-          </li>
-          <li className="sidebarListItem">
-            <Bookmark className="sidebarIcon" />
-            <span className="sidebarListItemText">Bookmarks</span>
-          </li>
-          <li className="sidebarListItem">
-            <HelpOutline className="sidebarIcon" />
-            <span className="sidebarListItemText">Questions</span>
-          </li>
-          <li className="sidebarListItem">
-            <WorkOutline className="sidebarIcon" />
-            <span className="sidebarListItemText">Jobs</span>
-          </li>
-          <li className="sidebarListItem">
-            <Event className="sidebarIcon" />
-            <span className="sidebarListItemText">Events</span>
-          </li>
-          <li className="sidebarListItem">
-            <School className="sidebarIcon" />
-            <span className="sidebarListItemText">Courses</span>
-          </li> */}
         </ul>
         {/* <button className="sidebarButton">Show More</button> */}
         {/* <hr className="sidebarHr" /> */}
@@ -62,6 +39,28 @@ export default function Sidebar() {
             <CloseFriend key={u.id} user={u} />
           ))}
         </ul> */}
+      </>
+    );
+    
+  };
+
+  const ProfileSidebar = () => {
+    return (
+      <>
+        <h4 className="sidebarCollectionTitle">Collection</h4>
+        <div className="sidebarCollection">
+          <NFTE contract="0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0" tokenId="18552" />
+          <NFTE contract="0x3b3ee1931dc30c1957379fac9aba94d1c48a5405" tokenId="387" />
+          <NFTE contract="0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0" tokenId="18552" />
+        </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="sidebar">
+      <div className="sidebarWrapper">
+        {user ? <ProfileSidebar /> : <HomeSidebar />}
       </div>
     </div>
   );
