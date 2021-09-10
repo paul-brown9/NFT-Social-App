@@ -6,11 +6,11 @@ import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
-import {NFTE} from '@nfte/react';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import { NFTE } from "@nfte/react";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import FlagOutlinedIcon from "@material-ui/icons/FlagOutlined";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -23,50 +23,52 @@ export default function Post({ post }) {
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
-  }, [currentUser._id, post.likes])
+  }, [currentUser._id, post.likes]);
 
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(`/users?userId=${post.userId}`);
       setUser(res.data);
-    }
+    };
     fetchUser();
   }, [post.userId]);
 
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id })
+      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id });
     } catch (err) {
       console.log(err);
     }
-    setLike(isLiked ? like - 1 : like + 1)
-    setIsLiked(!isLiked)
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
   };
 
-  const vertHandler = (event) =>{
+  const vertHandler = (event) => {
     setAnchorEl(event.currentTarget);
-  }
+  };
 
   const vertCloseHandler = () => {
     setAnchorEl(null);
-  }
+  };
 
   const vertDeleteHandler = async (e) => {
     e.preventDefault();
-    try{
-      await axios.delete("/posts/" + post._id, { data: { userId: currentUser._id }});
+    try {
+      await axios.delete("/posts/" + post._id, {
+        data: { userId: currentUser._id },
+      });
       window.location.reload();
-    } catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
   const vertReportHandler = async () => {
-    try{
+    try {
       console.log("report post");
-    } catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div className="post">
@@ -76,13 +78,15 @@ export default function Post({ post }) {
             <Link to={`profile/${user.username}`}>
               <img
                 className="postProfileImg"
-                src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"}
+                src={
+                  user.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + "person/noAvatar.png"
+                }
                 alt=""
               />
             </Link>
-            <span className="postUsername">
-              @{user.username}
-            </span>
+            <span className="postUsername">@{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
@@ -90,33 +94,60 @@ export default function Post({ post }) {
               aria-label="more"
               onClick={vertHandler}
               aria-haspopup="true"
-              aria-controls="long-menu" >
+              aria-controls="long-menu"
+            >
               <MoreVert />
             </IconButton>
             <Menu
               anchorEl={anchorEl}
-              keepMounted onClose={vertCloseHandler}
-              open={open}>
-              {currentUser._id === post.userId ? <MenuItem onClick={vertDeleteHandler}> <DeleteOutlinedIcon className="deleteIcon"/> Delete</MenuItem> : null}
-              {currentUser._id !== post.userId ? <MenuItem onClick={vertReportHandler}> <FlagOutlinedIcon className="reportIcon"/> Report</MenuItem> : null}
+              keepMounted
+              onClose={vertCloseHandler}
+              open={open}
+            >
+              {currentUser._id === post.userId ? (
+                <MenuItem onClick={vertDeleteHandler}>
+                  {" "}
+                  <DeleteOutlinedIcon className="deleteIcon" /> Delete
+                </MenuItem>
+              ) : null}
+              {currentUser._id !== post.userId ? (
+                <MenuItem onClick={vertReportHandler}>
+                  {" "}
+                  <FlagOutlinedIcon className="reportIcon" /> Report
+                </MenuItem>
+              ) : null}
             </Menu>
           </div>
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
           <img className="postImg" src={post.img ? PF + post.img : ""} alt="" />
-          {post.nftContract && post.nftTokenId ? <NFTE contract={post.nftContract} tokenId={post.nftTokenId}/> : null}
+          {post.nftContract && post.nftTokenId ? (
+            <NFTE contract={post.nftContract} tokenId={post.nftTokenId} />
+          ) : null}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             {/* <img className="likeIcon" src={`${PF}like.png`} onClick={likeHandler} alt="" /> */}
-            {isLiked ? <FavoriteIcon className="likeIcon" onClick={likeHandler}></FavoriteIcon> 
-                      : <FavoriteBorderIcon className="likeIcon" onClick={likeHandler}></FavoriteBorderIcon>
-            }
+            {isLiked ? (
+              <FavoriteIcon
+                className="likeIcon"
+                onClick={likeHandler}
+              ></FavoriteIcon>
+            ) : (
+              <FavoriteBorderIcon
+                className="likeIcon"
+                onClick={likeHandler}
+              ></FavoriteBorderIcon>
+            )}
             <span className="postLikeCounter">{like}</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{post.comment} comments</span>
+            <span className="postCommentText">
+              {post.comments.length === 1
+                ? post.comments.length + " comment"
+                : post.comments.length + " comments"}
+            </span>
           </div>
         </div>
       </div>

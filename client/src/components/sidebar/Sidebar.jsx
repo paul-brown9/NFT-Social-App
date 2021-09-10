@@ -14,7 +14,7 @@ import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
 import { NFTE } from "@nfte/react";
 
-export default function Sidebar({user}) {
+export default function Sidebar({ user }) {
   const HomeSidebar = () => {
     return (
       <>
@@ -41,17 +41,25 @@ export default function Sidebar({user}) {
         </ul> */}
       </>
     );
-    
   };
 
   const ProfileSidebar = () => {
     return (
       <>
-        <h4 className="sidebarCollectionTitle">Collection</h4>
         <div className="sidebarCollection">
-          <NFTE contract="0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0" tokenId="18552" />
-          <NFTE contract="0x3b3ee1931dc30c1957379fac9aba94d1c48a5405" tokenId="387" />
-          <NFTE contract="0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0" tokenId="18552" />
+          <h4 className="sidebarCollectionTitle">Collection</h4>
+          <NFTE
+            contract="0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0"
+            tokenId="18552"
+          />
+          <NFTE
+            contract="0x3b3ee1931dc30c1957379fac9aba94d1c48a5405"
+            tokenId="387"
+          />
+          <NFTE
+            contract="0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0"
+            tokenId="18552"
+          />
         </div>
       </>
     );

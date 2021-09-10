@@ -70,8 +70,8 @@ export default function Rightbar({ user }) {
       <>
         {user.username !== currentUser.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
-            {followed ? "Unfollow" : "Follow"}
             {followed ? <Remove /> : <Add />}
+            {followed ? "Unfollow" : "Follow"}
           </button>
         )}
         <div className="rightbarInfo">
@@ -96,13 +96,17 @@ export default function Rightbar({ user }) {
         </div>
         <h4 className="rightbarFollowerTitle">
           <span className="rightbarFollowerCount">{followers.length}</span>
-          {followers.length === 1 ? ' Follower' : ' Followers'} 
+          {followers.length === 1 ? " Follower" : " Followers"}
         </h4>
         <div className="rightbarFollowers">
           {followers.map((follower) => (
             <Link
               to={"/profile/" + follower.username}
-              style={{ textDecoration: "none", fontSize: "20px", textAlign: "center" }}
+              style={{
+                textDecoration: "none",
+                fontSize: "20px",
+                textAlign: "center",
+              }}
             >
               <div className="rightbarFollower">
                 <img
@@ -114,7 +118,9 @@ export default function Rightbar({ user }) {
                   alt=""
                   className="rightbarFollowerImg"
                 />
-                <span className="rightbarFollowerName">@{follower.username}</span>
+                <span className="rightbarFollowerName">
+                  @{follower.username}
+                </span>
               </div>
             </Link>
           ))}
@@ -122,7 +128,7 @@ export default function Rightbar({ user }) {
       </>
     );
   };
-  
+
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">

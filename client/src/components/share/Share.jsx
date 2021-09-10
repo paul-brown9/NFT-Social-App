@@ -49,8 +49,7 @@ export default function Share() {
 
   const submitNFTHandler = async (e) => {
     e.preventDefault();
-    
-  }
+  };
 
   return (
     <div className="share">
@@ -80,7 +79,6 @@ export default function Share() {
         )}
         <form className="shareBottom" onSubmit={submitHandler}>
           <div className="shareOptions">
-            
             {/* <label htmlFor="file" className="shareOption">
               <PermMedia htmlColor="tomato" className="shareIcon" />
               <span className="shareOptionText">Photo</span>
@@ -91,7 +89,7 @@ export default function Share() {
                 accept=".png, .jpeg, .jpg, .gif"
                 onChange={(e) => setFile(e.target.files[0])}
               />
-            </label> */}  
+            </label> */}
             {/* <div className="shareOption">
               <Label htmlColor="blue" className="shareIcon" />
               <span className="shareOptionText">NFT</span>
@@ -111,10 +109,31 @@ export default function Share() {
         </form>
         <div className="shareOption">
           <span className="shareOptionText">Find an NFT:</span>
-          <form className="shareNFT" noValidate autoComplete="off" onSubmit={submitNFTHandler}>
-            <TextField id="outlined-basic" size="small" margin="dense" label="Contract address" variant="outlined" />
-            <TextField id="outlined-basic" size="small" margin="dense" label="Token ID" variant="outlined" />
-            <button className="shareFindButton" type="submit">Find</button>            
+          <form
+            className="shareNFT"
+            noValidate
+            autoComplete="off"
+            onSubmit={submitNFTHandler}
+          >
+            <TextField
+              value={nftContract}
+              id="outlined-basic"
+              size="small"
+              margin="dense"
+              label="Contract address"
+              variant="outlined"
+            />
+            <TextField
+              value={nftTokenId}
+              id="outlined-basic"
+              size="small"
+              margin="dense"
+              label="Token ID"
+              variant="outlined"
+            />
+            <button className="shareFindButton" type="submit">
+              Find
+            </button>
           </form>
         </div>
       </div>
