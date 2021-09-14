@@ -12,6 +12,14 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
+import { NFTE } from "@nfte/react";
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
@@ -20,6 +28,15 @@ export default function Share() {
   const [file, setFile] = useState(null);
   const [nftContract, setNFTContract] = useState(null);
   const [nftTokenId, setNFTTokenId] = useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -47,8 +64,11 @@ export default function Share() {
     }
   };
 
-  const submitNFTHandler = async (e) => {
-    e.preventDefault();
+  const submitNFTHandler = () => {
+    // e.preventDefault();
+    setNFTContract(nftContract);
+    setNFTTokenId(nftTokenId);
+    setOpen(false);
   };
 
   return (
@@ -108,34 +128,45 @@ export default function Share() {
           </button>
         </form>
         <div className="shareOption">
-          <span className="shareOptionText">Find an NFT:</span>
-          <form
-            className="shareNFT"
-            noValidate
-            autoComplete="off"
-            onSubmit={submitNFTHandler}
+          <button className="shareFindButton" onClick={handleClickOpen}>
+            Find NFT
+          </button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="form-dialog-title"
           >
-            <TextField
-              value={nftContract}
-              id="outlined-basic"
-              size="small"
-              margin="dense"
-              label="Contract address"
-              variant="outlined"
-            />
-            <TextField
-              value={nftTokenId}
-              id="outlined-basic"
-              size="small"
-              margin="dense"
-              label="Token ID"
-              variant="outlined"
-            />
-            <button className="shareFindButton" type="submit">
-              Find
-            </button>
-          </form>
+            <DialogTitle id="form-dialog-title">Find an NFT</DialogTitle>
+            <DialogContent>
+              <TextField
+                value={nftContract}
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Contract address"
+                fullWidth
+              />
+              <TextField
+                value={nftTokenId}
+                margin="dense"
+                id="name"
+                label="Token ID"
+                fullWidth
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={submitNFTHandler} color="primary">
+                Find
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
+        {nftContract && nftTokenId ? (
+          <NFTE contract={nftContract} tokenId={nftTokenId} />
+        ) : null}
       </div>
     </div>
   );
