@@ -70,6 +70,13 @@
   cursor: pointer;
 }
 
+.commentIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 .deleteIcon {
   margin-right: 8px;
 }

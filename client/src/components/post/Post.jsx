@@ -3,7 +3,7 @@ import { MoreVert } from "@material-ui/icons";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import { NFTE } from "@nfte/react";
@@ -11,6 +11,8 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import FlagOutlinedIcon from "@material-ui/icons/FlagOutlined";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import Comments from "../../pages/comments/Comments";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -20,6 +22,7 @@ export default function Post({ post }) {
   const { user: currentUser } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const history = useHistory();
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
@@ -41,6 +44,14 @@ export default function Post({ post }) {
     }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  };
+
+  const commentHandler = () => {
+    try {
+      history.push("/comments/" + post._id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const vertHandler = (event) => {
@@ -128,26 +139,19 @@ export default function Post({ post }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {/* <img className="likeIcon" src={`${PF}like.png`} onClick={likeHandler} alt="" /> */}
             {isLiked ? (
-              <FavoriteIcon
-                className="likeIcon"
-                onClick={likeHandler}
-              ></FavoriteIcon>
+              <FavoriteIcon className="likeIcon" onClick={likeHandler} />
             ) : (
-              <FavoriteBorderIcon
-                className="likeIcon"
-                onClick={likeHandler}
-              ></FavoriteBorderIcon>
+              <FavoriteBorderIcon className="likeIcon" onClick={likeHandler} />
             )}
             <span className="postLikeCounter">{like}</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">
-              {post.comments.length === 1
-                ? post.comments.length + " comment"
-                : post.comments.length + " comments"}
-            </span>
+            <ChatBubbleOutlineIcon
+              className="commentIcon"
+              onClick={commentHandler}
+            />
+            <span className="postCommentText">{post.comments.length}</span>
           </div>
         </div>
       </div>

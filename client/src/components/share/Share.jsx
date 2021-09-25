@@ -26,6 +26,7 @@ export default function Share() {
   const [nftContract, setNFTContract] = useState(null);
   const [nftTokenId, setNFTTokenId] = useState(null);
   const [open, setOpen] = React.useState(false);
+  const [showNFT, setShowNFT] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,6 +41,8 @@ export default function Share() {
     const newPost = {
       userId: user._id,
       desc: desc.current.value,
+      nftContract: nftContract,
+      nftTokenId: nftTokenId,
     };
     if (file) {
       const data = new FormData();
@@ -62,11 +65,13 @@ export default function Share() {
   };
 
   const submitNFTHandler = () => {
-    // e.preventDefault();
-    setNFTContract(nftContract);
-    setNFTTokenId(nftTokenId);
+    setShowNFT(true);
     setOpen(false);
   };
+
+  const PreviewNFT = () => (
+    <NFTE className="shareNFT" contract={nftContract} tokenId={nftTokenId} />
+  );
 
   return (
     <div className="share">
@@ -126,14 +131,14 @@ export default function Share() {
         </form>
         <div className="shareOption">
           <button className="shareFindButton" onClick={handleClickOpen}>
-            Find NFT
+            Select NFT
           </button>
           <Dialog
             open={open}
             onClose={handleClose}
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">Find an NFT</DialogTitle>
+            <DialogTitle id="form-dialog-title">Select an NFT</DialogTitle>
             <DialogContent>
               <TextField
                 value={nftContract}
@@ -142,6 +147,7 @@ export default function Share() {
                 id="name"
                 label="Contract address"
                 fullWidth
+                onChange={(event) => setNFTContract(event.target.value)}
               />
               <TextField
                 value={nftTokenId}
@@ -149,6 +155,7 @@ export default function Share() {
                 id="name"
                 label="Token ID"
                 fullWidth
+                onChange={(event) => setNFTTokenId(event.target.value)}
               />
             </DialogContent>
             <DialogActions>
@@ -156,14 +163,12 @@ export default function Share() {
                 Cancel
               </Button>
               <Button onClick={submitNFTHandler} color="primary">
-                Find
+                Select
               </Button>
             </DialogActions>
           </Dialog>
+          {showNFT && nftContract && nftTokenId && <PreviewNFT />}
         </div>
-        {nftContract && nftTokenId ? (
-          <NFTE contract={nftContract} tokenId={nftTokenId} />
-        ) : null}
       </div>
     </div>
   );

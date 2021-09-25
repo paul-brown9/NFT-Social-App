@@ -1,7 +1,6 @@
 import "./topbar.css";
-import { Search, Person, ChatOutlined} from "@material-ui/icons";
-import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import { Search, Person, ChatOutlined } from "@material-ui/icons";
+import NotificationsOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
@@ -16,19 +15,19 @@ export default function Topbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
-  }
+  };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = '/';
-  }
+    window.location.href = "/";
+  };
 
   const handleProfile = () => {
     history.push("/profile/" + user.username);
-  }
+  };
 
   return (
     <div className="topbarContainer">
@@ -50,34 +49,29 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <ChatBubbleOutlineOutlinedIcon />
-            <span className="topbarIconBadge">5</span>
-          </div>
-          <div className="topbarIconItem">
             <NotificationsOutlinedIcon />
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
         <IconButton
-              aria-label="more"
-              onClick={handleClick}
-              aria-haspopup="true"
-              aria-controls="long-menu" >
-          <img 
+          aria-label="more"
+          onClick={handleClick}
+          aria-haspopup="true"
+          aria-controls="long-menu"
+        >
+          <img
             src={
-              user.profilePicture 
-              ? PF + user.profilePicture
-              : PF + "person/noAvatar.png"
-            } 
-            alt="" 
-            className="topbarImg" />
+              user.profilePicture
+                ? PF + user.profilePicture
+                : PF + "person/noAvatar.png"
+            }
+            alt=""
+            className="topbarImg"
+          />
         </IconButton>
-        <Menu
-            anchorEl={anchorEl}
-            keepMounted onClose={handleClose}
-            open={open}>
-            <MenuItem onClick={handleProfile}>Profile</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <Menu anchorEl={anchorEl} keepMounted onClose={handleClose} open={open}>
+          <MenuItem onClick={handleProfile}>Profile</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </div>
     </div>
