@@ -86,14 +86,12 @@
   background-color: rgb(76, 76, 236);
   font-weight: 500;
   margin: 10px 0 0 10px;
-  /* margin-right: 200px; */
-  /* margin-bottom: 900px; */
   cursor: pointer;
   color: white;
 }
 
-.shareImgContainer {
-  padding: 0 20px 10px 20px;
+.shareNFTContainer {
+  padding: 0 0 10px 20px;
   position: relative;
 }
 
@@ -102,7 +100,7 @@
   object-fit: cover;
 }
 
-.shareCancelImg {
+.shareCancelNFT {
   position: absolute;
   top: 0;
   right: 20px;

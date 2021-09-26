@@ -30,7 +30,7 @@
 
 .postUsername {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 800;
   margin: 0 10px;
 }
 
@@ -39,7 +39,16 @@
 }
 
 .postCenter {
-  margin: 20px 0;
+  margin: 10px 50px;
+}
+
+.postText {
+  font-size: 16px;
+}
+
+.postNFT {
+  margin-top: 14px;
+  align-items: center;
 }
 
 .postImg {
@@ -89,7 +98,8 @@
   font-size: 15px;
 }
 
-.postCommentText {
+.postCommentCounter {
   cursor: pointer;
   font-size: 15px;
+  margin-right: 10px;
 }

@@ -134,7 +134,11 @@ export default function Post({ post }) {
           <span className="postText">{post?.desc}</span>
           <img className="postImg" src={post.img ? PF + post.img : ""} alt="" />
           {post.nftContract && post.nftTokenId ? (
-            <NFTE contract={post.nftContract} tokenId={post.nftTokenId} />
+            <NFTE
+              className="postNFT"
+              contract={post.nftContract}
+              tokenId={post.nftTokenId}
+            />
           ) : null}
         </div>
         <div className="postBottom">
@@ -151,7 +155,7 @@ export default function Post({ post }) {
               className="commentIcon"
               onClick={commentHandler}
             />
-            <span className="postCommentText">{post.comments.length}</span>
+            <span className="postCommentCounter">{post.comments.length}</span>
           </div>
         </div>
       </div>

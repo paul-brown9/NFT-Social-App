@@ -7,7 +7,7 @@ import {
   Cancel,
 } from "@material-ui/icons";
 import { TextField } from "@material-ui/core";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { NFTE } from "@nfte/react";
@@ -17,6 +17,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
@@ -69,8 +70,16 @@ export default function Share() {
     setOpen(false);
   };
 
+  const cancelNFT = () => {
+    setNFTContract(null);
+    setNFTTokenId(null);
+  };
+
   const PreviewNFT = () => (
-    <NFTE className="shareNFT" contract={nftContract} tokenId={nftTokenId} />
+    <div className="shareNFTContainer">
+      <NFTE className="shareNFT" contract={nftContract} tokenId={nftTokenId} />
+      <CancelOutlinedIcon className="shareCancelNFT" onClick={cancelNFT} />
+    </div>
   );
 
   return (
