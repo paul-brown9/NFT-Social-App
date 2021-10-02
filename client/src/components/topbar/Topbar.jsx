@@ -12,6 +12,7 @@ export default function Topbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
+  const [searchResult, setSearchResult] = useState(null);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -29,6 +30,10 @@ export default function Topbar() {
     history.push("/profile/" + user.username);
   };
 
+  const handleSearchChange = (e) => {
+    
+  }
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -43,6 +48,8 @@ export default function Topbar() {
             placeholder="Search for an artist"
             className="searchInput"
             type="search"
+            value={searchResult}
+            onChange={handleSearchChange} 
           />
         </div>
       </div>
