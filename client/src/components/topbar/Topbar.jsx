@@ -12,6 +12,7 @@ export default function Topbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
+  const [searchResult, setSearchResult] = useState(null);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -29,6 +30,10 @@ export default function Topbar() {
     history.push("/profile/" + user.username);
   };
 
+  const handleSearchSubmit = () => {
+    history.push("/profile/" + searchResult);
+  };
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -37,14 +42,17 @@ export default function Topbar() {
         </Link>
       </div>
       <div className="topbarCenter">
-        <div className="searchbar">
-          <Search className="searchIcon" />
-          <input
-            placeholder="Search for an artist"
-            className="searchInput"
-            type="search"
-          />
-        </div>
+        <form onSubmit={handleSearchSubmit}>
+          <div className="searchbar">
+            <Search className="searchIcon" />
+            <input
+              placeholder="Search for an artist"
+              className="searchInput"
+              type="search"
+              onChange={(event) => setSearchResult(event.target.value)}
+            />
+          </div>
+        </form>
       </div>
       <div className="topbarRight">
         <div className="topbarIcons">
